@@ -6,6 +6,7 @@
     tools:context=".HomeListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homeRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
