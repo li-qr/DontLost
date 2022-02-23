@@ -11,21 +11,32 @@ import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 
 @Dao
 public interface ItemDao {
 
+//    @Query("select * from item")
+//    Flowable<List<Item>> getAll();
+//
+//    @Query("select * from item where id = :id")
+//    Single<Item> findById(int id);
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    Completable insert(Item item);
+//
+//    @Delete
+//    Completable deleteById(Item item);
+
     @Query("select * from item")
-    Flowable<List<Item>> getAll();
+    List<Item> getAll();
 
-    @Query("select * from item where id = :id")
-    Single<Item> findById(int id);
+    @Query("select * from item limit :position,1")
+    Item getItem(int position);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Completable insert(Item item);
+    @Query("select count(1) from item")
+    int countItem();
 
-    @Delete
-    Completable deleteById(Item item);
 }

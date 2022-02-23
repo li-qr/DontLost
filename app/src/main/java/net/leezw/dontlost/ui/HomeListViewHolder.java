@@ -26,7 +26,6 @@ public class HomeListViewHolder extends RecyclerView.ViewHolder {
         this.nameTextView = itemView.findViewById(R.id.nameText);
         this.dateTextView = itemView.findViewById(R.id.dateText);
         this.tokenTextView = itemView.findViewById(R.id.tokenText);
-        this.tokenTextView.setText("还有");
         this.tictTextView = itemView.findViewById(R.id.tickText);
     }
 
@@ -35,7 +34,10 @@ public class HomeListViewHolder extends RecyclerView.ViewHolder {
         Instant instant = Instant.ofEpochMilli(item.date);
         ZoneId zone = ZoneId.systemDefault();
         this.dateTextView.setText(LocalDateTime.ofInstant(instant,zone)
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:ss:mm")));
-        this.tictTextView.setText("123天");
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        long now = System.currentTimeMillis();
+        this.tokenTextView.setText(now<item.date?"还有":"已经");
+        long span = Math.abs(item.date-now);
+        this.tictTextView.setText(span/(1000*60*60*24)+"天");
     }
 }
